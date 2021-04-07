@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey lighten-4" flat height="50rem" tile>
+  <v-card color="grey lighten-4" flat height="10%" tile>
     <v-toolbar dense>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
