@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 1000px; width: 100%">
+  <div style="height: 100rem; width: 100%">
     <l-map :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-marker :lat-lng="marker">

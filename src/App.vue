@@ -1,16 +1,19 @@
 <template>
-  <div id="app">
+  <div id="app" class="container-fluid">
+    <Toolbar></Toolbar>
     <Map></Map>
   </div>
 </template>
 
 <script>
 import Map from './components/Map.vue'
+import Toolbar from './components/Toolbar'
 
 export default {
   name: 'App',
   components: {
-    Map
+    Map,
+    Toolbar
   }
 }
 </script>
