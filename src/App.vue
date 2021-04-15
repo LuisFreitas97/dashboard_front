@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Toolbar></Toolbar>
-    <v-layout wrap row style="height: 95%; width: 100%">
+    <v-layout wrap row style="height: 93%; width: 100%">
       <v-flex xs12 sm10 md10 class="pa-1">
         <Map></Map>
       </v-flex>
