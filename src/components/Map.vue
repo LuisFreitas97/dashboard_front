@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 90%; width: 100%">
+  <div style="height: 100%; width: 100%">
     <l-map :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-marker :lat-lng="marker">
@@ -9,7 +9,17 @@
           :icon-url="icon.url"
         />
       </l-marker>
-      <l-circle :lat-lng="circle.center" :radius="circle.radius" />
+      <l-circle :lat-lng="circle.center" :radius="circle.radius">
+        <l-popup>
+          <div>
+            ID 1234566789
+            <br/>
+            Temperature 23º
+            <br/>
+            Risk 42
+          </div>
+        </l-popup>
+      </l-circle>
       <l-rectangle :bounds="rectangle.bounds" :l-style="rectangle.style" />
       <l-polygon :lat-lngs="polygon.latlngs" :color="polygon.color" />
       <l-polyline :lat-lngs="polyline.latlngs" :color="polyline.color" />
@@ -28,6 +38,7 @@ import {
   LPolygon,
   LPolyline,
   LIcon,
+  LPopup,
 } from "vue2-leaflet";
 
 export default {
@@ -42,15 +53,16 @@ export default {
     LPolygon,
     LPolyline,
     LIcon,
+    LPopup,
   },
   data() {
     return {
       // zoom: 13,
       // center: latLng(41.8239, -7.79006),
       icon: {
-        size: [32,37],
-        anchor: [16,37],
-        url: "/images/icon/marker.png"
+        size: [32, 37],
+        anchor: [16, 37],
+        url: "/images/icon/marker.png",
       },
       zoom: 11,
       center: [47.31322, -1.319482],

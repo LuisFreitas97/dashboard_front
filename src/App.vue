@@ -1,44 +1,15 @@
 <template>
   <v-app>
-    <!-- <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar> -->
-
     <Toolbar></Toolbar>
-    <Map></Map>
+    <v-layout wrap row style="height: 95%; width: 100%">
+      <v-flex xs12 sm10 md10 class="pa-1">
+        <Map></Map>
+      </v-flex>
+
+      <v-flex xs12 sm2 md2 class="pa-1">
+        <Detail></Detail>
+      </v-flex>
+    </v-layout>
 
     <v-main>
       <router-view />
@@ -49,12 +20,14 @@
 <script>
 import Map from "./components/Map.vue";
 import Toolbar from "./components/Toolbar";
+import Detail from "./components/Detail";
 
 export default {
   name: "App",
   components: {
     Map,
     Toolbar,
+    Detail,
   },
 
   data: () => ({
