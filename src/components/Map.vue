@@ -13,9 +13,9 @@
         <l-popup>
           <div>
             ID 1234566789
-            <br/>
+            <br />
             Temperature 23º
-            <br/>
+            <br />
             Risk 42
           </div>
         </l-popup>
@@ -23,6 +23,13 @@
       <l-rectangle :bounds="rectangle.bounds" :l-style="rectangle.style" />
       <l-polygon :lat-lngs="polygon.latlngs" :color="polygon.color" />
       <l-polyline :lat-lngs="polyline.latlngs" :color="polyline.color" />
+
+      <l-polygon
+        v-for="subsection in subSections"
+        :key="subsection.id"
+        :lat-lngs="subsection.geometry.coordinates[0]"
+        color="green"
+      />
     </l-map>
   </div>
 </template>
@@ -40,6 +47,7 @@ import {
   LIcon,
   LPopup,
 } from "vue2-leaflet";
+import axios from "axios";
 
 export default {
   name: "Map",
@@ -59,13 +67,15 @@ export default {
     return {
       // zoom: 13,
       // center: latLng(41.8239, -7.79006),
+      subSections: [],
       icon: {
         size: [32, 37],
         anchor: [16, 37],
         url: "/images/icon/marker.png",
       },
       zoom: 11,
-      center: [47.31322, -1.319482],
+      // center: [47.31322, -1.319482],
+      center: [41.8318, -7.78999],
       circle: {
         center: latLng(47.41322, -1.0482),
         radius: 4500,
@@ -117,13 +127,42 @@ export default {
       marker: latLng(47.41322, -1.219482),
     };
   },
+  created() {
+    axios
+      .get(
+        process.env.VUE_APP_DB_MICROSERVICE +
+          "/collection?collectionName=drawAreas",
+        {}
+      )
+      .then((response) => {
+        var data = response.data.data;
+        if (data && data.length) {
+          // this.subSections = data[0].features;
+          console.log(data[0].features);
+          this.subSections = this.changeCoordOrder(data[0].features);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally();
+  },
+  methods: {
+    changeCoordOrder(data) {
+      data.forEach(function (value) {
+        value.geometry.coordinates.forEach(function (value) {
+          value.forEach(function (coords, key) {
+            value[key] = [coords[1], coords[0]];
+          });
+        });
+      });
+      console.log(data);
+      return data;
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* #map {
-  height: 500px;
-  width: 500px;
-} */
 </style>
