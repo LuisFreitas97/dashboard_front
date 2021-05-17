@@ -129,37 +129,16 @@ export default {
   },
   created() {
     axios
-      .get(
-        process.env.VUE_APP_DB_MICROSERVICE +
-          "/collection?collectionName=drawAreas",
-        {}
-      )
+      .get(process.env.VUE_APP_DB_MICROSERVICE + "/drawAreas", {})
       .then((response) => {
-        var data = response.data.data;
-        if (data && data.length) {
-          // this.subSections = data[0].features;
-          console.log(data[0].features);
-          this.subSections = this.changeCoordOrder(data[0].features);
-        }
+        this.subSections = response.data.data;
       })
       .catch((e) => {
         console.log(e);
       })
       .finally();
   },
-  methods: {
-    changeCoordOrder(data) {
-      data.forEach(function (value) {
-        value.geometry.coordinates.forEach(function (value) {
-          value.forEach(function (coords, key) {
-            value[key] = [coords[1], coords[0]];
-          });
-        });
-      });
-      console.log(data);
-      return data;
-    },
-  },
+  methods: {},
 };
 </script>
 
