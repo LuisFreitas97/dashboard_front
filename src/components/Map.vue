@@ -26,10 +26,20 @@
 
       <l-polygon
         v-for="subsection in subSections"
-        :key="subsection.id"
+        :key="subsection.properties.BGRI11"
         :lat-lngs="subsection.geometry.coordinates[0]"
         color="green"
-      />
+      >
+        <l-popup>
+          <div>
+            ID {{ subsection.properties.BGRI11}}
+            <br />
+            {{ subsection.weatherData.atts.description }} : {{ subsection.weatherData.data }}  {{ subsection.weatherData.atts.units }}
+            <br />
+            Risk 42
+          </div>
+        </l-popup>
+      </l-polygon>
     </l-map>
   </div>
 </template>
