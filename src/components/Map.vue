@@ -16,7 +16,7 @@
             <br />
             Temperature 23º
             <br />
-            Risk 42
+            Risk 43
           </div>
         </l-popup>
       </l-circle>
@@ -36,7 +36,7 @@
             <br />
             {{ subsection.weatherData.atts.description }} : {{ subsection.weatherData.data }}  {{ subsection.weatherData.atts.units }}
             <br />
-            Risk 42
+            Risk 43
           </div>
         </l-popup>
       </l-polygon>
