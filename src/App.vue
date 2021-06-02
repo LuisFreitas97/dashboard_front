@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- <Toolbar></Toolbar> -->
-    <v-container fluid fill-height>
+    <!-- <v-container fluid fill-height>
       <v-layout wrap row>
         <v-flex xs12 sm12 md12 class="pa-1">
           <Toolbar></Toolbar>
@@ -14,6 +14,22 @@
           <Detail></Detail>
         </v-flex>
       </v-layout>
+    </v-container> -->
+
+    <v-container fluid fill-height>
+      <v-row>
+        <v-col xs="12" sm="12" md="12" class="pa-1">
+          <Toolbar></Toolbar>
+        </v-col>
+      </v-row>
+      <v-row style="height: 90%">
+        <v-col xs="12" sm="10" md="10" class="pa-1">
+          <Map></Map>
+        </v-col>
+        <v-col xs="12" sm="2" md="2" class="pa-1">
+          <Detail></Detail>
+        </v-col>
+      </v-row>
     </v-container>
 
     <v-main>
