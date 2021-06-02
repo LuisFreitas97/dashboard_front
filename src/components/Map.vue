@@ -28,13 +28,16 @@
         v-for="subsection in subSections"
         :key="subsection.properties.BGRI11"
         :lat-lngs="subsection.geometry.coordinates[0]"
-        color="green"
+        color="#a2a2a2"
+        :fillColor="getIndexColor(subsection)"
       >
         <l-popup>
           <div>
-            ID {{ subsection.properties.BGRI11}}
+            ID {{ subsection.properties.BGRI11 }}
             <br />
-            {{ subsection.weatherData.atts.description }} : {{ subsection.weatherData.data }}  {{ subsection.weatherData.atts.units }}
+            {{ subsection.weatherData.atts.description }} :
+            {{ subsection.weatherData.data }}
+            {{ subsection.weatherData.atts.units }}
             <br />
             Risk 43
           </div>
@@ -148,7 +151,24 @@ export default {
       })
       .finally();
   },
-  methods: {},
+  methods: {
+    getIndexColor(subsection) {
+      var temp = subsection.weatherData.data;
+      if (temp > 25) {
+        return "#ffcbdb";
+      } else if (temp >= 22 && temp < 25) {
+        return "#ffa500";
+      } else if (temp >= 20 && temp < 22) {
+        return "#ffd153";
+      } else if (temp >= 18 && temp < 20) {
+        return "#c4d348";
+      } else if (temp < 18) {
+        return "#55cb50";
+      } else {
+        return "#3388ff";
+      }
+    },
+  },
 };
 </script>
 
