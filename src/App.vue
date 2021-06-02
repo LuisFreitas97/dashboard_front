@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <!-- <Toolbar></Toolbar> -->
-    <v-container fluid>
-      <v-layout wrap row style="height: 93%; width: 100%">
+    <v-container fluid fill-height>
+      <v-layout wrap row>
         <v-flex xs12 sm12 md12 class="pa-1">
           <Toolbar></Toolbar>
         </v-flex>
