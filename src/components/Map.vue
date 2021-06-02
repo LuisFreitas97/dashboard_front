@@ -1,5 +1,12 @@
 <template>
   <div style="height: 100%; width: 100%">
+    <v-overlay :value="!!loading">
+      <v-progress-circular
+        indeterminate
+        :size="64"
+        color="blue"
+      ></v-progress-circular>
+    </v-overlay>
     <l-map :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <!-- <l-marker :lat-lng="marker">
@@ -79,6 +86,7 @@ export default {
   },
   data() {
     return {
+      loading: 0,
       // zoom: 13,
       // center: latLng(41.8239, -7.79006),
       subSections: [],
@@ -142,6 +150,7 @@ export default {
     };
   },
   created() {
+    this.loading++;
     axios
       .get(process.env.VUE_APP_DB_MICROSERVICE + "/drawAreas", {})
       .then((response) => {
@@ -150,20 +159,20 @@ export default {
       .catch((e) => {
         console.log(e);
       })
-      .finally();
+      .finally(this.loading--);
   },
   methods: {
     getIndexColor(subsection) {
       var temp = subsection.weatherData.data;
       if (temp > 25) {
         return "#ffcbdb";
-      } else if (temp >= 22 && temp < 25) {
+      } else if (temp >= 20 && temp < 25) {
         return "#ffa500";
-      } else if (temp >= 20 && temp < 22) {
+      } else if (temp >= 15 && temp < 20) {
         return "#ffd153";
-      } else if (temp >= 18 && temp < 20) {
+      } else if (temp >= 10 && temp < 15) {
         return "#c4d348";
-      } else if (temp < 18) {
+      } else if (temp < 10) {
         return "#55cb50";
       } else {
         return "#3388ff";
