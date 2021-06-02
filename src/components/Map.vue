@@ -29,6 +29,7 @@
         :key="subsection.properties.BGRI11"
         :lat-lngs="subsection.geometry.coordinates[0]"
         color="#a2a2a2"
+        weight="1"
         :fillColor="getIndexColor(subsection)"
       >
         <l-popup>
