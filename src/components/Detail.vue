@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <v-card class="mx-auto">
+    <v-card class="mx-auto mb-4">
       <v-tabs v-model="tab">
         <v-tab> Nível de Risco </v-tab>
         <v-tab> Temperatura máxima (interna) </v-tab>
