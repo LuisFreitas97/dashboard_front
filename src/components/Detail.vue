@@ -154,7 +154,6 @@ export default {
           categories: [
             "Nível de risco"
           ],
-          position: "top",
         },
         stroke: {
           width: 1,
@@ -250,7 +249,6 @@ export default {
           categories: [
             "Temperatura máxima exterior"
           ],
-          position: "top",
         },
         stroke: {
           width: 1,
@@ -346,7 +344,6 @@ export default {
           categories: [
             "Temperatura máxima interior"
           ],
-          position: "top",
         },
         stroke: {
           width: 1,
