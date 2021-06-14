@@ -1,12 +1,37 @@
 <template>
   <div class="container">
     <v-card class="mx-auto">
-      <apexchart
-        width="100%"
-        type="heatmap"
-        :options="chartOptions"
-        :series="series"
-      ></apexchart>
+      <v-tabs v-model="tab">
+        <v-tab> Nível de Risco </v-tab>
+        <v-tab> Temperatura máxima (interna) </v-tab>
+        <v-tab> Temperatura máxima (exterior) </v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <apexchart
+            width="100%"
+            type="heatmap"
+            :options="riskChartOptions"
+            :series="riskSeries"
+          ></apexchart>
+        </v-tab-item>
+        <v-tab-item>
+          <apexchart
+            width="100%"
+            type="heatmap"
+            :options="outTempChartOptions"
+            :series="outTempSeries"
+          ></apexchart>
+        </v-tab-item>
+        <v-tab-item>
+          <apexchart
+            width="100%"
+            type="heatmap"
+            :options="inTempChartOptions"
+            :series="inTempSeries"
+          ></apexchart>
+        </v-tab-item>
+      </v-tabs-items>
     </v-card>
     <v-card class="mx-auto">
       <v-card-text>
@@ -43,45 +68,46 @@ export default {
   components: { apexchart: VueApexCharts },
   data() {
     return {
-      series: [
+      tab: null,
+      riskSeries: [
         {
           name: "17063200114",
-          data: [20, 30, 40],
+          data: [20],
         },
         {
           name: "17063200115",
-          data: [30, 10, 5],
+          data: [30],
         },
         {
           name: "17063200116",
-          data: [40, 4, 10],
+          data: [40],
         },
         {
           name: "17063200117",
-          data: [50, 60, 70],
+          data: [50],
         },
         {
           name: "17063200118",
-          data: [15, 50, 50],
+          data: [15],
         },
         {
           name: "17063200119",
-          data: [25, 35, 12],
+          data: [25],
         },
         {
           name: "17063200120",
-          data: [5, 14, 60],
+          data: [5],
         },
         {
           name: "17063200121",
-          data: [2, 4, 40],
+          data: [2],
         },
         {
           name: "17063200122",
-          data: [3, 5, 6],
+          data: [3],
         },
       ],
-      chartOptions: {
+      riskChartOptions: {
         chart: {
           height: 350,
           type: "heatmap",
@@ -126,9 +152,7 @@ export default {
         },
         xaxis: {
           categories: [
-            "Nível de risco",
-            "Temp máx (interna)",
-            "Temp máx (exterior)",
+            "Nível de risco"
           ],
           position: "top",
         },
@@ -136,7 +160,199 @@ export default {
           width: 1,
         },
         title: {
-          text: "HeatMap Chart with Color Range",
+          text: "Nível de risco por área",
+        },
+      },
+
+      // Max out temp
+      outTempSeries: [
+        {
+          name: "17063200114",
+          data: [20],
+        },
+        {
+          name: "17063200115",
+          data: [30],
+        },
+        {
+          name: "17063200116",
+          data: [40],
+        },
+        {
+          name: "17063200117",
+          data: [50],
+        },
+        {
+          name: "17063200118",
+          data: [15],
+        },
+        {
+          name: "17063200119",
+          data: [25],
+        },
+        {
+          name: "17063200120",
+          data: [5],
+        },
+        {
+          name: "17063200121",
+          data: [2],
+        },
+        {
+          name: "17063200122",
+          data: [3],
+        },
+      ],
+      outTempChartOptions: {
+        chart: {
+          height: 350,
+          type: "heatmap",
+        },
+        plotOptions: {
+          heatmap: {
+            shadeIntensity: 0.5,
+            radius: 0,
+            useFillColorAsStroke: true,
+            colorScale: {
+              ranges: [
+                {
+                  from: -30,
+                  to: 5,
+                  name: "Baixo",
+                  color: "#00A100",
+                },
+                {
+                  from: 6,
+                  to: 20,
+                  name: "Médio",
+                  color: "#128FD9",
+                },
+                {
+                  from: 21,
+                  to: 45,
+                  name: "Alto",
+                  color: "#FFB200",
+                },
+                {
+                  from: 46,
+                  to: 55,
+                  name: "Extremo",
+                  color: "#FF0000",
+                },
+              ],
+            },
+          },
+        },
+        dataLabels: {
+          enabled: true,
+        },
+        xaxis: {
+          categories: [
+            "Temperatura máxima exterior"
+          ],
+          position: "top",
+        },
+        stroke: {
+          width: 1,
+        },
+        title: {
+          text: "Temperatura máxima exterior por área",
+        },
+      },
+
+      //Max in temperature
+      inTempSeries: [
+        {
+          name: "17063200114",
+          data: [20],
+        },
+        {
+          name: "17063200115",
+          data: [30],
+        },
+        {
+          name: "17063200116",
+          data: [40],
+        },
+        {
+          name: "17063200117",
+          data: [50],
+        },
+        {
+          name: "17063200118",
+          data: [15],
+        },
+        {
+          name: "17063200119",
+          data: [25],
+        },
+        {
+          name: "17063200120",
+          data: [5],
+        },
+        {
+          name: "17063200121",
+          data: [2],
+        },
+        {
+          name: "17063200122",
+          data: [3],
+        },
+      ],
+      inTempChartOptions: {
+        chart: {
+          height: 350,
+          type: "heatmap",
+        },
+        plotOptions: {
+          heatmap: {
+            shadeIntensity: 0.5,
+            radius: 0,
+            useFillColorAsStroke: true,
+            colorScale: {
+              ranges: [
+                {
+                  from: -30,
+                  to: 5,
+                  name: "Baixo",
+                  color: "#00A100",
+                },
+                {
+                  from: 6,
+                  to: 20,
+                  name: "Médio",
+                  color: "#128FD9",
+                },
+                {
+                  from: 21,
+                  to: 45,
+                  name: "Alto",
+                  color: "#FFB200",
+                },
+                {
+                  from: 46,
+                  to: 55,
+                  name: "Extremo",
+                  color: "#FF0000",
+                },
+              ],
+            },
+          },
+        },
+        dataLabels: {
+          enabled: true,
+        },
+        xaxis: {
+          categories: [
+            "Temperatura máxima interior"
+          ],
+          position: "top",
+        },
+        stroke: {
+          width: 1,
+        },
+        title: {
+          text: "Temperatura máxima interior por área",
         },
       },
     };
