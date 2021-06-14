@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; width: 100%">
-    <v-overlay :value="!!loading" color="#FF0000">
+    <v-overlay :value="!!loading" :absolute="true">
       <v-progress-circular
         indeterminate
         :size="64"
@@ -75,7 +75,7 @@ export default {
       .catch((e) => {
         console.log(e);
       })
-      .finally(this.loading--);
+      .finally(() => {this.loading--});
   },
   methods: {
     getIndexColor(subsection) {

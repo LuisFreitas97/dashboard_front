@@ -23,10 +23,10 @@
         </v-col>
       </v-row>
       <v-row style="height: 90%">
-        <v-col xs="12" sm="10" md="10" class="pa-1">
+        <v-col xs="12" sm="8" md="8" class="pa-1">
           <Map></Map>
         </v-col>
-        <v-col xs="12" sm="2" md="2" class="pa-1">
+        <v-col xs="12" sm="4" md="4" class="pa-1">
           <Detail></Detail>
         </v-col>
       </v-row>
