@@ -7,7 +7,7 @@
         color="blue"
       ></v-progress-circular>
     </v-overlay>
-    <l-map :zoom="zoom" :center="center">
+    <l-map :zoom="zoom" :center="center" style="z-index: 0;">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-polygon
         v-for="subsection in subSections"
