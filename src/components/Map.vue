@@ -1,49 +1,57 @@
 <template>
   <div style="height: 100%; width: 100%">
-    <v-overlay :value="!!loading" :absolute="true">
+    <v-overlay :value="!!loading" :absolute="true" style="z-index: 600">
       <v-progress-circular
         indeterminate
         :size="64"
         color="blue"
       ></v-progress-circular>
     </v-overlay>
-    <l-map :zoom="zoom" :center="center" style="z-index: 0;">
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-polygon
-        v-for="subsection in subSections"
-        :key="subsection.properties ? subsection.properties.BGRI11 : null"
-        :lat-lngs="
-          subsection.geometry &&
-          subsection.geometry.coordinates &&
-          subsection.geometry.coordinates.length
-            ? subsection.geometry.coordinates[0]
-            : []
-        "
-        color="#a2a2a2"
-        :weight="1"
-        :fillColor="getIndexColor(subsection)"
+    <div style="position: relative; height: 100%; width: 100%">
+      <ColorRange></ColorRange>
+      <l-map
+        :zoom="zoom"
+        :center="center"
+        style="z-index: 0; position: absolute"
       >
-        <l-popup>
-          <div>
-            <div v-if="subsection.properties">
-              ID {{ subsection.properties.BGRI11 }}
+        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-polygon
+          v-for="subsection in subSections"
+          :key="subsection.properties ? subsection.properties.BGRI11 : null"
+          :lat-lngs="
+            subsection.geometry &&
+            subsection.geometry.coordinates &&
+            subsection.geometry.coordinates.length
+              ? subsection.geometry.coordinates[0]
+              : []
+          "
+          color="#a2a2a2"
+          :weight="1"
+          :fillColor="getIndexColor(subsection)"
+        >
+          <l-popup>
+            <div>
+              <div v-if="subsection.properties">
+                ID {{ subsection.properties.BGRI11 }}
+              </div>
+              <div v-if="subsection.weatherData">
+                {{ subsection.weatherData.atts.description }} :
+                {{ subsection.weatherData.data }}
+                {{ subsection.weatherData.atts.units }}
+              </div>
+              <div>Risk 43</div>
             </div>
-            <div v-if="subsection.weatherData">
-              {{ subsection.weatherData.atts.description }} :
-              {{ subsection.weatherData.data }}
-              {{ subsection.weatherData.atts.units }}
-            </div>
-            <div>Risk 43</div>
-          </div>
-        </l-popup>
-      </l-polygon>
-    </l-map>
+          </l-popup>
+        </l-polygon>
+      </l-map>
+    </div>
   </div>
 </template>
 
 <script>
 import { LMap, LTileLayer, LPolygon, LPopup } from "vue2-leaflet";
 import axios from "axios";
+import ColorRange from "./ColorRange.vue";
 
 export default {
   name: "Map",
@@ -53,6 +61,7 @@ export default {
     LTileLayer,
     LPolygon,
     LPopup,
+    ColorRange,
   },
   data() {
     return {
@@ -75,7 +84,9 @@ export default {
       .catch((e) => {
         console.log(e);
       })
-      .finally(() => {this.loading--});
+      .finally(() => {
+        this.loading--;
+      });
   },
   methods: {
     getIndexColor(subsection) {
