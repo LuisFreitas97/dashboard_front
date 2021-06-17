@@ -1,19 +1,15 @@
 <template>
-  <div style="height: 100%; width: 100%">
-    <v-overlay :value="!!loading" :absolute="true" style="z-index: 600">
+  <div class="mapSize">
+    <v-overlay :value="!!loading" :absolute="true" class="overlay">
       <v-progress-circular
         indeterminate
         :size="64"
         color="blue"
       ></v-progress-circular>
     </v-overlay>
-    <div style="position: relative; height: 100%; width: 100%">
-      <ColorRange></ColorRange>
-      <l-map
-        :zoom="zoom"
-        :center="center"
-        style="z-index: 0; position: absolute"
-      >
+    <div class="divMapInternal">
+      <color-range></color-range>
+      <l-map :zoom="zoom" :center="center" class="map">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-polygon
           v-for="subsection in subSections"
@@ -111,3 +107,21 @@ export default {
   },
 };
 </script>
+<style scoped>
+.overlay {
+  z-index: 600 !important;
+}
+.mapSize {
+  height: 100% !important;
+  width: 100% !important;
+}
+.map {
+  z-index: 0 !important;
+  position: absolute !important;
+}
+.divMapInternal {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+</style>
