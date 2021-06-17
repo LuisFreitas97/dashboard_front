@@ -12,23 +12,23 @@
   >
     <v-list-item>
       <v-list-item-avatar tile size="25" color="#ffcbdb"></v-list-item-avatar>
-      <v-list-item-content> &#62;25 </v-list-item-content>
+      <v-list-item-content> &#62;25&#8451; </v-list-item-content>
     </v-list-item>
     <v-list-item>
       <v-list-item-avatar tile size="25" color="#ffa500"></v-list-item-avatar>
-      <v-list-item-content> 20-25 </v-list-item-content>
+      <v-list-item-content> 20-25&#8451; </v-list-item-content>
     </v-list-item>
     <v-list-item>
       <v-list-item-avatar tile size="25" color="#ffd153"></v-list-item-avatar>
-      <v-list-item-content> 15-20 </v-list-item-content>
+      <v-list-item-content> 15-20&#8451; </v-list-item-content>
     </v-list-item>
     <v-list-item>
       <v-list-item-avatar tile size="25" color="#c4d348"></v-list-item-avatar>
-      <v-list-item-content> 10-15 </v-list-item-content>
+      <v-list-item-content> 10-15&#8451; </v-list-item-content>
     </v-list-item>
     <v-list-item>
       <v-list-item-avatar tile size="25" color="#55cb50"></v-list-item-avatar>
-      <v-list-item-content> &#60;10 </v-list-item-content>
+      <v-list-item-content> &#60;10&#8451; </v-list-item-content>
     </v-list-item>
   </v-card>
 </template>
@@ -43,7 +43,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
