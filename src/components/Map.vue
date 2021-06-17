@@ -11,6 +11,7 @@
       <color-range></color-range>
       <l-map :zoom="zoom" :center="center" class="map">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <v-geosearch :options="geosearchOptions"></v-geosearch>
         <l-polygon
           v-for="subsection in subSections"
           :key="subsection.properties ? subsection.properties.BGRI11 : null"
@@ -48,6 +49,10 @@
 import { LMap, LTileLayer, LPolygon, LPopup } from "vue2-leaflet";
 import axios from "axios";
 import ColorRange from "./ColorRange.vue";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+import VGeosearch from "vue2-leaflet-geosearch";
+
+import L from "leaflet";
 
 export default {
   name: "Map",
@@ -58,9 +63,14 @@ export default {
     LPolygon,
     LPopup,
     ColorRange,
+    VGeosearch,
   },
   data() {
     return {
+      geosearchOptions: {
+        // Important part Here
+        provider: new OpenStreetMapProvider(),
+      },
       subSections: [],
       loading: 0,
       zoom: 11,
@@ -71,6 +81,7 @@ export default {
     };
   },
   created() {
+    this.fixMarker();
     this.loading++;
     axios
       .get(process.env.VUE_APP_DB_MICROSERVICE + "/drawAreas", {})
@@ -103,6 +114,15 @@ export default {
       } else {
         return "#3388ff";
       }
+    },
+    fixMarker() {
+      delete L.Icon.Default.prototype._getIconUrl;
+
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+        iconUrl: require("leaflet/dist/images/marker-icon.png"),
+        shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+      });
     },
   },
 };
