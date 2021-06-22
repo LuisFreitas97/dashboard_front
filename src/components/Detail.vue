@@ -154,7 +154,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: true,
+          enabled: false,
         },
         xaxis: {
           categories: ["Nível de risco"],
@@ -252,7 +252,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: true,
+          enabled: false,
         },
         xaxis: {
           categories: ["Humidade (2 metros)"],
@@ -352,10 +352,10 @@ export default {
           },
         },
         dataLabels: {
-          enabled: true,
+          enabled: false,
         },
         xaxis: {
-          categories: ["Valocidade do vento (10 metros)"],
+          categories: ["Velocidade do vento (10 metros)"],
         },
         stroke: {
           width: 1,
