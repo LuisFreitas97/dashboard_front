@@ -38,20 +38,15 @@
         <div>Informações</div>
         <p class="display-1 text--primary">Dicas</p>
         <div class="text--primary">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor
-          incididunt ut labore.
+          Consumir sempre bastante água de forma a manter o corpo sempre hidratado.
           <br />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor
-          incididunt ut labore et dolore magna aliqua.
+          Utilizar roupas claras.
           <br />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed tempor
-          incididunt ut labore.
+          Não se expor ao sol nas horas de maior calor, ou seja, entre as 11h e 16h.
         </div>
 
-        <p class="display-1 text--primary">Número úteis</p>
+        <p class="display-1 text--primary">Números úteis</p>
         <div class="text--primary">
-          Entidade +351 123456
-          <br />
           Entidade +351 123456
         </div>
       </v-card-text>

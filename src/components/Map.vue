@@ -29,14 +29,14 @@
           <l-popup>
             <div>
               <div v-if="subsection.properties">
-                ID {{ subsection.properties.BGRI11 }}
+                ID da zona: {{ subsection.properties.BGRI11 }}
               </div>
               <div v-if="subsection.weatherData">
-                {{ subsection.weatherData.atts.description }} :
+                {{ subsection.weatherData.atts.description }}:
                 {{ subsection.weatherData.data }}
                 {{ subsection.weatherData.atts.units }}
               </div>
-              <div>Risk 43</div>
+              <div>Nível de risco: 43</div>
             </div>
           </l-popup>
         </l-polygon>
@@ -68,8 +68,9 @@ export default {
   data() {
     return {
       geosearchOptions: {
-        // Important part Here
         provider: new OpenStreetMapProvider(),
+        autoClose: true,
+        // keepResult: true,
       },
       subSections: [],
       loading: 0,
