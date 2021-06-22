@@ -1,10 +1,17 @@
 <template>
   <div class="container">
+    <v-overlay :value="!!loading" :absolute="true" class="overlay">
+      <v-progress-circular
+        indeterminate
+        :size="64"
+        color="blue"
+      ></v-progress-circular>
+    </v-overlay>
     <v-card class="mx-auto mb-4">
       <v-tabs v-model="tab">
         <v-tab> Nível de Risco </v-tab>
-        <v-tab> Temperatura máxima (interna) </v-tab>
-        <v-tab> Temperatura máxima (exterior) </v-tab>
+        <v-tab @change="getHumidityData"> Humidade (2 metros) </v-tab>
+        <v-tab @change="getWindSpeed"> Velocidade do vento (10 metros) </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item>
@@ -19,16 +26,16 @@
           <apexchart
             width="100%"
             type="heatmap"
-            :options="outTempChartOptions"
-            :series="outTempSeries"
+            :options="humidityChartOptions"
+            :series="humidityData"
           ></apexchart>
         </v-tab-item>
         <v-tab-item>
           <apexchart
             width="100%"
             type="heatmap"
-            :options="inTempChartOptions"
-            :series="inTempSeries"
+            :options="windSpeedChartOptions"
+            :series="windSpeedData"
           ></apexchart>
         </v-tab-item>
       </v-tabs-items>
@@ -38,17 +45,17 @@
         <div>Informações</div>
         <p class="display-1 text--primary">Dicas</p>
         <div class="text--primary">
-          Consumir sempre bastante água de forma a manter o corpo sempre hidratado.
+          Consumir sempre bastante água de forma a manter o corpo sempre
+          hidratado.
           <br />
           Utilizar roupas claras.
           <br />
-          Não se expor ao sol nas horas de maior calor, ou seja, entre as 11h e 16h.
+          Não se expor ao sol nas horas de maior calor, ou seja, entre as 11h e
+          16h.
         </div>
 
         <p class="display-1 text--primary">Números úteis</p>
-        <div class="text--primary">
-          Entidade +351 123456
-        </div>
+        <div class="text--primary">Entidade +351 123456</div>
       </v-card-text>
     </v-card>
   </div>
@@ -56,6 +63,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+import axios from "axios";
 
 export default {
   name: "Detail",
@@ -63,6 +71,9 @@ export default {
   components: { apexchart: VueApexCharts },
   data() {
     return {
+      humidityData: [],
+      windSpeedData: [],
+      loading: 0,
       tab: null,
       riskSeries: [
         {
@@ -146,9 +157,7 @@ export default {
           enabled: true,
         },
         xaxis: {
-          categories: [
-            "Nível de risco"
-          ],
+          categories: ["Nível de risco"],
         },
         stroke: {
           width: 1,
@@ -157,8 +166,6 @@ export default {
           text: "Nível de risco por área",
         },
       },
-
-      // Max out temp
       outTempSeries: [
         {
           name: "17063200114",
@@ -197,10 +204,17 @@ export default {
           data: [3],
         },
       ],
-      outTempChartOptions: {
+      humidityChartOptions: {
         chart: {
           height: 350,
           type: "heatmap",
+        },
+        noData: {
+          text: "Sem Dados",
+          align: "center",
+          verticalAlign: "middle",
+          offsetX: 0,
+          offsetY: 0,
         },
         plotOptions: {
           heatmap: {
@@ -241,15 +255,13 @@ export default {
           enabled: true,
         },
         xaxis: {
-          categories: [
-            "Temperatura máxima exterior"
-          ],
+          categories: ["Humidade (2 metros)"],
         },
         stroke: {
           width: 1,
         },
         title: {
-          text: "Temperatura máxima exterior por área",
+          text: "Humidade (2 metros)",
         },
       },
 
@@ -292,10 +304,17 @@ export default {
           data: [3],
         },
       ],
-      inTempChartOptions: {
+      windSpeedChartOptions: {
         chart: {
           height: 350,
           type: "heatmap",
+        },
+        noData: {
+          text: "Sem Dados",
+          align: "center",
+          verticalAlign: "middle",
+          offsetX: 0,
+          offsetY: 0,
         },
         plotOptions: {
           heatmap: {
@@ -336,18 +355,57 @@ export default {
           enabled: true,
         },
         xaxis: {
-          categories: [
-            "Temperatura máxima interior"
-          ],
+          categories: ["Valocidade do vento (10 metros)"],
         },
         stroke: {
           width: 1,
         },
         title: {
-          text: "Temperatura máxima interior por área",
+          text: "Velocidade do vento (10 metros)",
         },
       },
     };
+  },
+  created() {},
+  methods: {
+    getHumidityData() {
+      this.loading++;
+      axios
+        .get(process.env.VUE_APP_DB_MICROSERVICE + "/weatherDataByType", {
+          params: {
+            vars: "rh2",
+          },
+        })
+        .then((response) => {
+          var data = response.data.data;
+          this.humidityData = data.slice(0, 10).map(function (obj) {
+            return { name: obj.BGRI11, data: [obj.data] };
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => this.loading--);
+    },
+    getWindSpeed() {
+      this.loading++;
+      axios
+        .get(process.env.VUE_APP_DB_MICROSERVICE + "/weatherDataByType", {
+          params: {
+            vars: "ws10",
+          },
+        })
+        .then((response) => {
+          var data = response.data.data;
+          this.humidityData = data.slice(0, 10).map(function (obj) {
+            return { name: obj.BGRI11, data: [obj.data] };
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => this.loading--);
+    },
   },
 };
 </script>
