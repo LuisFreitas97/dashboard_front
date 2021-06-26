@@ -10,7 +10,7 @@
     <v-card class="mx-auto mb-4">
       <v-tabs v-model="tab">
         <v-tab> Nível de Risco </v-tab>
-        <v-tab @change="getHumidityData"> Humidade (2 metros) </v-tab>
+        <v-tab @change="getHumidityData"> Humidade relativa (2 metros) </v-tab>
         <v-tab @change="getWindSpeed"> Velocidade do vento (10 metros) </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
@@ -255,13 +255,13 @@ export default {
           enabled: false,
         },
         xaxis: {
-          categories: ["Humidade (2 metros)"],
+          categories: ["Humidade relativa (2 metros)"],
         },
         stroke: {
           width: 1,
         },
         title: {
-          text: "Humidade (2 metros)",
+          text: "Humidade relativa (%)",
         },
       },
 
@@ -361,7 +361,7 @@ export default {
           width: 1,
         },
         title: {
-          text: "Velocidade do vento (10 metros)",
+          text: "Velocidade do vento (m/s)",
         },
       },
     };
@@ -378,9 +378,11 @@ export default {
         })
         .then((response) => {
           var data = response.data.data;
-          this.humidityData = data.slice(0, 10).map(function (obj) {
-            return { name: obj.BGRI11, data: [obj.data] };
-          });
+          if (data && data.length) {
+            this.humidityData = data.slice(0, 10).map(function (obj) {
+              return { name: obj.BGRI11, data: [obj.data] };
+            });
+          }
         })
         .catch((e) => {
           console.log(e);
@@ -397,9 +399,11 @@ export default {
         })
         .then((response) => {
           var data = response.data.data;
-          this.humidityData = data.slice(0, 10).map(function (obj) {
-            return { name: obj.BGRI11, data: [obj.data] };
-          });
+          if (data && data.length) {
+            this.windSpeedData = data.slice(0, 10).map(function (obj) {
+              return { name: obj.BGRI11, data: [obj.data] };
+            });
+          }
         })
         .catch((e) => {
           console.log(e);
