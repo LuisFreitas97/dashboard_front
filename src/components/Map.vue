@@ -27,17 +27,54 @@
           :fillColor="getIndexColor(subsection)"
         >
           <l-popup>
-            <div>
+            <!-- <div>
               <div v-if="subsection.properties">
-                ID da zona: {{ subsection.properties.BGRI11 }}
+                Zona: {{ subsection.properties.LUG11DESIG }} 
               </div>
+              <div v-if="subsection.properties"> ID da zona: {{ subsection.properties.BGRI11 }}</div>
               <div v-if="subsection.weatherData">
                 {{ subsection.weatherData.atts.description }}:
                 {{ subsection.weatherData.data }}
                 {{ subsection.weatherData.atts.units }}
               </div>
               <div>Nível de risco: 43</div>
-            </div>
+            </div> -->
+
+            <v-card
+              class="mx-auto"
+              max-width="400"
+            >
+              <v-list-item v-if="subsection.properties">
+                <v-list-item-content>
+                  <v-list-item-title>Zona:</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    subsection.properties.LUG11DESIG
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item v-if="subsection.properties">
+                <v-list-item-content>
+                  <v-list-item-title>ID da zona:</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    subsection.properties.BGRI11
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item v-if="subsection.weatherData">
+                <v-list-item-content>
+                  <v-list-item-title>Dados meteorológicos:</v-list-item-title>
+                  <v-list-item-subtitle
+                    >
+                    {{ subsection.weatherData.data }}
+                    {{
+                      subsection.weatherData.atts.units
+                    }}</v-list-item-subtitle
+                  >
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
           </l-popup>
         </l-polygon>
       </l-map>

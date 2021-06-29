@@ -42,20 +42,25 @@
     </v-card>
     <v-card class="mx-auto">
       <v-card-text>
-        <div>Informações</div>
-        <p class="display-1 text--primary">Dicas</p>
-        <div class="text--primary">
-          Consumir sempre bastante água de forma a manter o corpo sempre
-          hidratado.
-          <br />
-          Utilizar roupas claras.
-          <br />
-          Não se expor ao sol nas horas de maior calor, ou seja, entre as 11h e
-          16h.
-        </div>
+        <p class="display-1 text--primary">Informações</p>
+        <ul>
+          <li>
+            Consumir sempre bastante água de forma a manter o corpo sempre
+            hidratado.
+          </li>
+          <li>Utilizar roupas claras.</li>
+          <li>
+            Não se expor ao sol nas horas de maior calor, ou seja, entre as 11h
+            e 16h.
+          </li>
+        </ul>
 
         <p class="display-1 text--primary">Números úteis</p>
-        <div class="text--primary">Entidade +351 123456</div>
+        <ul>
+          <li>
+            Entidade oficial: +351 123456
+          </li>
+        </ul>
       </v-card-text>
     </v-card>
   </div>
@@ -154,7 +159,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         xaxis: {
           categories: ["Nível de risco"],
@@ -166,44 +171,6 @@ export default {
           text: "Nível de risco por área",
         },
       },
-      outTempSeries: [
-        {
-          name: "17063200114",
-          data: [20],
-        },
-        {
-          name: "17063200115",
-          data: [30],
-        },
-        {
-          name: "17063200116",
-          data: [40],
-        },
-        {
-          name: "17063200117",
-          data: [50],
-        },
-        {
-          name: "17063200118",
-          data: [15],
-        },
-        {
-          name: "17063200119",
-          data: [25],
-        },
-        {
-          name: "17063200120",
-          data: [5],
-        },
-        {
-          name: "17063200121",
-          data: [2],
-        },
-        {
-          name: "17063200122",
-          data: [3],
-        },
-      ],
       humidityChartOptions: {
         chart: {
           height: 350,
@@ -224,26 +191,26 @@ export default {
             colorScale: {
               ranges: [
                 {
-                  from: -30,
-                  to: 5,
+                  from: 0,
+                  to: 25,
                   name: "Baixo",
                   color: "#00A100",
                 },
                 {
-                  from: 6,
-                  to: 20,
+                  from: 26,
+                  to: 50,
                   name: "Médio",
                   color: "#128FD9",
                 },
                 {
-                  from: 21,
-                  to: 45,
+                  from: 51,
+                  to: 75,
                   name: "Alto",
                   color: "#FFB200",
                 },
                 {
-                  from: 46,
-                  to: 55,
+                  from: 76,
+                  to: 100,
                   name: "Extremo",
                   color: "#FF0000",
                 },
@@ -252,7 +219,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         xaxis: {
           categories: ["Humidade relativa (2 metros)"],
@@ -264,46 +231,6 @@ export default {
           text: "Humidade relativa (%)",
         },
       },
-
-      //Max in temperature
-      inTempSeries: [
-        {
-          name: "17063200114",
-          data: [20],
-        },
-        {
-          name: "17063200115",
-          data: [30],
-        },
-        {
-          name: "17063200116",
-          data: [40],
-        },
-        {
-          name: "17063200117",
-          data: [50],
-        },
-        {
-          name: "17063200118",
-          data: [15],
-        },
-        {
-          name: "17063200119",
-          data: [25],
-        },
-        {
-          name: "17063200120",
-          data: [5],
-        },
-        {
-          name: "17063200121",
-          data: [2],
-        },
-        {
-          name: "17063200122",
-          data: [3],
-        },
-      ],
       windSpeedChartOptions: {
         chart: {
           height: 350,
@@ -324,26 +251,26 @@ export default {
             colorScale: {
               ranges: [
                 {
-                  from: -30,
-                  to: 5,
+                  from: 0,
+                  to: 25,
                   name: "Baixo",
                   color: "#00A100",
                 },
                 {
-                  from: 6,
-                  to: 20,
+                  from: 26,
+                  to: 50,
                   name: "Médio",
                   color: "#128FD9",
                 },
                 {
-                  from: 21,
-                  to: 45,
+                  from: 51,
+                  to: 75,
                   name: "Alto",
                   color: "#FFB200",
                 },
                 {
-                  from: 46,
-                  to: 55,
+                  from: 76,
+                  to: 100,
                   name: "Extremo",
                   color: "#FF0000",
                 },
@@ -352,7 +279,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         xaxis: {
           categories: ["Velocidade do vento (10 metros)"],
