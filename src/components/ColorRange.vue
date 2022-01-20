@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       ranges: [
-        { color: "#ffcbdb", text: ">25" },
+        { color: "red", text: ">25" },
         { color: "#ffa500", text: "20-25" },
         { color: "#ffd153", text: "15-20" },
         { color: "#c4d348", text: "10-15" },

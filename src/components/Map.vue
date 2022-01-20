@@ -140,7 +140,7 @@ export default {
 
       var temp = weather.data;
       if (temp > 25) {
-        return "#ffcbdb";
+        return "red";
       } else if (temp >= 20 && temp < 25) {
         return "#ffa500";
       } else if (temp >= 15 && temp < 20) {
